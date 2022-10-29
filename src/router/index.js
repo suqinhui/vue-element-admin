@@ -68,7 +68,7 @@ export const constantRoutes = [
   {
     path: '/401',
     component: () => import('@/views/error-page/401'),
-    hidden: true
+    hidden: true // 不会在侧边栏出现
   },
   {
     path: '/',
@@ -79,7 +79,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true } // 如果设置为true，它则会固定在标签页中
       }
     ]
   },
