@@ -6,15 +6,18 @@
     <a class="document-btn" target="_blank" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/">国内文档</a>
     <dropdown-menu class="document-btn" :items="articleList" title="系列文章" />
     <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/zh/job/">内推招聘</a>
+    <a v-permission="['admin']">测试</a>
   </div>
 </template>
 
 <script>
 import DropdownMenu from '@/components/Share/DropdownMenu'
+import permission from '@/directive/permission/index.js'
 
 export default {
   name: 'Documentation',
   components: { DropdownMenu },
+  directives: { permission },
   data() {
     return {
       articleList: [
