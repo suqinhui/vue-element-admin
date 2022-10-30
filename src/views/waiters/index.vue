@@ -1,5 +1,7 @@
 <template>
   <div class="app-container">
+    <h3>{{ name }}</h3>
+    <el-button @click="getName">按钮</el-button>
     <div class="filter-container">
       <el-input v-model="listQuery.title" placeholder="Title" style="width: 200px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-select v-model="listQuery.importance" placeholder="Imp" clearable style="width: 90px" class="filter-item">
@@ -151,6 +153,7 @@ import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
+import { mapState, mapMutations } from 'vuex'
 
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
@@ -226,10 +229,14 @@ export default {
       downloadLoading: false
     }
   },
+  computed: {
+    ...mapState('waiters', ['name'])
+  },
   created() {
     this.getList()
   },
   methods: {
+    ...mapMutations('waiters', ['getName']),
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
