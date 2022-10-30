@@ -1,4 +1,5 @@
 import { asyncRoutes, constantRoutes } from '@/router'
+// import { array } from 'jszip/lib/support'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -50,8 +51,30 @@ const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
+      const routesArr = []
       if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
+        // accessedRoutes = asyncRoutes || []
+        asyncRoutes.forEach((item) => {
+          if (item.hasOwnProperty('meta')) {
+            if (item.meta.hasOwnProperty('roles')) {
+              if (item.meta.roles.includes('admin')) {
+                if (item.hasOwnProperty('children')) {
+                  item.children.forEach((obj) => {
+                    if (obj.hasOwnProperty('meta')) {
+                      if (obj.meta.hasOwnProperty('roles')) {
+                        if (!obj.meta.roles.includes('admin')) {
+                          obj.hidden = true
+                        }
+                      }
+                    }
+                  })
+                }
+                routesArr.push(item)
+              }
+            }
+          }
+        })
+        accessedRoutes = routesArr || []
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
       }

@@ -130,6 +130,19 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/waiters',
+    component: Layout,
+    meta: { roles: ['admin'] },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/waiters/index'),
+        name: 'Waiters',
+        meta: { title: '员工管理', icon: 'icon' }
+      }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
@@ -154,8 +167,10 @@ export const asyncRoutes = [
         path: 'directive',
         component: () => import('@/views/permission/directive'),
         name: 'DirectivePermission',
+        hidden: false,
         meta: {
-          title: 'Directive Permission'
+          title: 'Directive Permission',
+          roles: ['editor'] // or you can only set roles in sub nav
           // if do not set roles, means: this page does not require permission
         }
       },
