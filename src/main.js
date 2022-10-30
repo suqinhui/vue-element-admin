@@ -17,6 +17,7 @@ import router from './router'
 import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
+import globalUtils from './utils/global-utils'
 
 import * as filters from './filters' // global filters
 
@@ -51,3 +52,5 @@ new Vue({
   store,
   render: h => h(App)
 })
+
+Vue.mixin(globalUtils)

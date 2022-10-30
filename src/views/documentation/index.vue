@@ -6,7 +6,7 @@
     <a class="document-btn" target="_blank" href="https://panjiachen.gitee.io/vue-element-admin-site/zh/">国内文档</a>
     <dropdown-menu class="document-btn" :items="articleList" title="系列文章" />
     <a class="document-btn" target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/zh/job/">内推招聘</a>
-    <a v-permission="['admin']">测试</a>
+    <el-button v-permission="['admin']" @click="testButton">测试</el-button>
   </div>
 </template>
 
@@ -31,6 +31,11 @@ export default {
         { title: 'webpack4（上）', href: 'https://juejin.im/post/59bb864b5188257e7a427c09' },
         { title: 'webpack4（下）', href: 'https://juejin.im/post/5b5d6d6f6fb9a04fea58aabc' }
       ]
+    }
+  },
+  methods: {
+    testButton() {
+      this.testGlobalMethod()
     }
   }
 }
